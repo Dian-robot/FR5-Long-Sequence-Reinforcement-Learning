@@ -30,8 +30,7 @@ if __name__ == '__main__':
     args, kwargs = get_args()
     env = FR5_Env(gui=True, guide_rate=0)
     env.render()
-    model = PPO.load(
-        "FR_Gym/FR5_Reinforcement-learning_half_expert_half_explore/models/PPO/best_model.zip")
+    model = PPO.load("FR_Gym/FR5_Reinforcement-learning/models/PPO/best_model.zip")
 
     success_rate = []
 
@@ -86,6 +85,7 @@ if __name__ == '__main__':
     #         success_rate.append(success_num / (test_num - error_num))
     #     print("阶段：", test_stage, "成功率：", success_rate[test_stage])
     # print("成功率：", success_rate)
+    
     #不使用指导模型
     test_num = args.test_num  # 测试次数
     test_num = 100  # 测试次数

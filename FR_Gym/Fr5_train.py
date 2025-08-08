@@ -44,8 +44,8 @@ def make_env(i, env_test=False):
     def _init():
         if i % 2 == 0:
             # print("创建测试模型", i)
-            # gui = True if (i == 0) and (online == False) else False
-            gui = False
+            gui = True if (i == 0) and (online == False) else False
+            # gui = False
             env = FR5_Env(
                 gui=gui,
                 use_guide_model=True,
@@ -59,8 +59,8 @@ def make_env(i, env_test=False):
 
             print("实例的属性及其值已写入到 env_attributes.txt 文件中。")
         else:
-            # gui = True if (i == 1) and (online == False) else False
-            gui = False
+            gui = True if (i == 1) and (online == False) else False
+            # gui = False
             env = FR5_Env(gui=gui, use_guide_model=False, online=online)
         env = Monitor(env, logs_dir)
         env.render()
@@ -80,10 +80,8 @@ if __name__ == "__main__":
         os.makedirs(checkpoints)
 
     # Instantiate the env
-    num_train = 16
+    num_train = 8
     env = SubprocVecEnv([make_env(i) for i in range(num_train)])
-    # env_test = SubprocVecEnv([make_env(i, env_test=True) for i in range(num_train)])
-    # env = DummyVecEnv([make_env() for i in range(num_train)])
 
     new_logger = configure(logs_dir, ["stdout", "csv", "tensorboard"])
 
@@ -97,10 +95,6 @@ if __name__ == "__main__":
         device="cuda",
         policy_kwargs=dict(lstm_layers=2),
     )
-    # if online:
-    #     model = PPO.load("/root/nzj/FR5_Reinforcement-learning/models/PPO/0416-123255/best_model.zip",env)
-    # else:
-    #     model = PPO.load("/home/dianrobot/fr5long_sequence/FR_Gym/FR5_Reinforcement-learning/models/PPO/0624-101130/best_model.zip",env)
 
     model.set_logger(new_logger)
     tensorboard_callback = TensorboardCallback()

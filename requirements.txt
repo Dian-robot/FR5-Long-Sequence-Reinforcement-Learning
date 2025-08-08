@@ -1,0 +1,13 @@
+gymnasium==0.29.1
+interval==1.0.0
+pybullet==3.2.7
+opencv-python
+loguru
+# stable_baselines3
+scipy
+numpy==2.2.5
+tensorboard
+tensorboardX
+torch==2.6.0 # pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+matplotlib
+pandas

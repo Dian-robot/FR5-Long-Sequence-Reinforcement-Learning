@@ -3,7 +3,7 @@ from stable_baselines3.common.callbacks import EvalCallback,CallbackList,BaseCal
 class TensorboardCallback(BaseCallback):
     def __init__(self, verbose=0):
         super(TensorboardCallback, self).__init__(verbose)
-        self.n_envs = 16  # 假设有8个环境
+        self.n_envs = 8  # 假设有8个环境
         self.n_stages = 4
         
         self.episode_lengths = [[0 for _ in range(self.n_envs)] for __ in range(self.n_stages)]

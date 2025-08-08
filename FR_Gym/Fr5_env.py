@@ -30,10 +30,6 @@ model1 = PPO.load(path + "models/PPO1/best_model.zip")
 model2 = PPO.load(path + "models/PPO2/best_model.zip")
 model3 = PPO.load(path + "models/PPO3/best_model.zip")
 model4 = PPO.load(path + "models/PPO4/best_model.zip")
-# model5 = PPO.load(path + "models/PPO5/best_model.zip")
-# model6 = PPO.load(path + "models/PPO6/best_model.zip")
-# model7 = PPO.load(path + "models/PPO7/best_model.zip")
-# model8 = PPO.load(path + "models/PPO8/best_model.zip")
 models = [model1, model2, model3, model4]
 print("模型载入完毕")
 
@@ -132,13 +128,6 @@ class FR5_Env(gym.Env):
             basePosition=[0, 0, 0],
             baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi]),
             flags=p.URDF_USE_SELF_COLLISION,
-        )
-
-        self.machine = self.p.loadURDF(
-            "fr5_description/urdf/machine.urdf",
-            useFixedBase=True,
-            basePosition=[0, 2, 0],
-            baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi]),
         )
 
         # 创建桌子
@@ -390,31 +379,27 @@ class FR5_Env(gym.Env):
             self.target1 = [i for i in drawer_handle_position]
             self.target2 = [i for i in self.target1]
             self.target2[1] -= 0.27
-            # self.target3 = [i for i in self.target2]
-            # self.target3[2] += 0.18
+            self.target3 = [i for i in self.target2]
+            self.target3[2] += 0.18
             self.target4 = [i for i in self.target_position]
             self.target4[1] += 0.02
             self.target5 = [i for i in self.target2]
             self.target5[1] += 0.15
             self.target5[2] = self.target_position[2]
-            # self.target6 = [i for i in self.target3]
-            # self.target7 = [i for i in self.target2]
-            # self.target7[1] += 0.02
-            # self.target8 = [i for i in self.target1]
             self.targets = [self.target1, self.target2,self.target4,self.target5]
 
-        if self.stage == 1:
-            self.move(self.target1)
-            self.close_gripper()
-        if self.stage == 2:
-            self.move(self.target2)
-            self.open_gripper()
-        if self.stage == 3:
-            # self.move((self.target2[0], self.target2[1], self.target2[2]+0.18))
-            self.move(self.target4)
-            self.close_gripper()
-            # self.move(self.target5)
-            # self.open_gripper()
+        # if self.stage == 1:
+        #     self.move(self.target1)
+        #     self.close_gripper()
+        # if self.stage == 2:
+        #     self.move(self.target2)
+        #     self.open_gripper()
+        # if self.stage == 3:
+        #     self.move(self.target3)
+        #     self.move(self.target4)
+        #     self.close_gripper()
+        #     # self.move(self.target5)
+        #     # self.open_gripper()
 
         self.target[:3] = self.targets[self.stage]
         self.target[3] = self.stage / 3

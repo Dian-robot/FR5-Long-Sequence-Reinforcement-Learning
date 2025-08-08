@@ -1,0 +1,8 @@
+gym==0.26.2
+pybullet
+opencv-python
+loguru
+stable_baselines3
+scipy
+numpy==1.25.0
+tensorboard
